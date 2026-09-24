@@ -1,1 +1,10 @@
-{"display_name":"000 SharedNAI 연결","loading_order":-1000,"requires":[],"optional":[],"js":"index.js","author":"SharedNAI Bridge contributors","version":"1.0.0","description":"sharednai5.pro 계정으로 이미지 생성 및 AutoPic 연결"}
+{
+  "display_name": "000 SharedNAI 연결",
+  "loading_order": -1000,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "author": "SharedNAI Bridge contributors",
+  "version": "1.1.0",
+  "description": "sharednai5.pro 계정으로 이미지 생성 및 AutoPic 연결"
+}
