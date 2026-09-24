@@ -7,13 +7,14 @@
    <label for="snb-username">사이트 아이디<input id="snb-username" class="text_pole" autocomplete="off"></label>
    <label for="snb-password">사이트 비밀번호<input id="snb-password" class="text_pole" type="password" autocomplete="off"></label>
   </div>
+  <label class="checkbox_label"><input id="snb-remember" type="checkbox" checked><span>로그인 유지 (서버 재시작 후 자동 연결)</span></label>
   <div class="snb-actions">
    <button type="button" id="snb-connect" class="menu_button">연결</button>
    <button type="button" id="snb-check" class="menu_button">인증 확인</button>
    <button type="button" id="snb-disconnect" class="menu_button">연결 해제</button>
   </div>
   <p id="snb-status" role="status" aria-live="polite"></p>
-  <p class="snb-note">사이트 계정에 등록된 키를 사용합니다. 비밀번호는 저장하지 않으며, 서버 재시작 또는 토큰 만료 후 다시 연결해야 합니다.</p>
+  <p class="snb-note">비밀번호는 저장하지 않습니다. 로그인 유지를 켜면 로그인 토큰을 서버의 사용자 데이터 폴더에 저장합니다. 연결 해제 시 삭제되며, 토큰이 만료되면 다시 로그인해야 합니다.</p>
   <div class="snb-account-header"><b>크레딧·할당량</b><button type="button" id="snb-refresh" class="menu_button">계정 정보 새로고침</button></div>
   <dl id="snb-account"></dl>
   <p id="snb-account-status" role="status" aria-live="polite">연결 후 표시됩니다.</p>

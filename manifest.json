@@ -5,7 +5,7 @@
   "optional": [],
   "js": "index.js",
   "author": "SharedNAI Bridge contributors",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "sharednai5.pro 계정으로 이미지 생성 및 AutoPic 연결",
   "css": "style.css"
 }
