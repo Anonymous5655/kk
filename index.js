@@ -2,11 +2,11 @@ import { extension_settings } from '../../../extensions.js';
 import { saveSettingsDebounced, getRequestHeaders } from '../../../../script.js';
 import { SECRET_KEYS, secret_state } from '../../../secrets.js';
 import { installTransport } from './transport.mjs';
-import { accountRows, installResolutionLabels } from './display.mjs';
+import { accountRows } from './display.mjs';
 const ID = 'sharednai_bridge', API = '/api/plugins/sharednai-bridge';
 extension_settings[ID] ??= {enabled: false};
 const settings = extension_settings[ID];
-settings.sizeLabels ??= true;
+delete settings.sizeLabels;
 let connected = false, previousNovelState, ownsGate = false, container;
 let accountVersion = 0, refreshTimer;
 const el = id => container?.querySelector('#snb-' + id);
@@ -27,7 +27,7 @@ async function api(path, body) {
     const response = await fetch(API + path, {method: body === undefined ? 'GET' : 'POST', headers: getRequestHeaders(), ...(body === undefined ? {} : {body: JSON.stringify(body)})});
     if (!response.ok) {
         if (response.status === 401 && path !== '/connect') {connected = false; updateGate(); clearAccount('다시 로그인하세요.');}
-        let message = response.status === 404 ? 'SharedNAI 서버 플러그인 1.1을 설치하고 enableServerPlugins를 켠 뒤 서버를 재시작하세요.' : `HTTP ${response.status}`;
+        let message = response.status === 404 ? 'SharedNAI 서버 플러그인 1.2를 설치하고 enableServerPlugins를 켠 뒤 서버를 재시작하세요.' : `HTTP ${response.status}`;
         try { message = (await response.json()).message || message; } catch { /* HTML errors */ }
         throw new Error(message);
     }
@@ -60,9 +60,6 @@ jQuery(async () => {
     const response = await fetch(new URL('./settings.html', import.meta.url));
     container = document.createElement('div'); container.innerHTML = await response.text();
     document.querySelector('#extensions_settings').append(container);
-    const updateLabels = installResolutionLabels(document.body, () => settings.sizeLabels);
-    el('size-labels').checked = settings.sizeLabels;
-    el('size-labels').addEventListener('change', () => {settings.sizeLabels = el('size-labels').checked; saveSettingsDebounced(); updateLabels();});
     el('enabled').checked = !!settings.enabled;
     el('enabled').addEventListener('change', () => {settings.enabled = el('enabled').checked; saveSettingsDebounced(); updateGate();});
     el('connect').addEventListener('click', async () => {

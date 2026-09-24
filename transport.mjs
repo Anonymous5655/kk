@@ -5,15 +5,18 @@ export function installTransport(host, enabled, destination = '/api/plugins/shar
         const request = input instanceof Request ? input : null;
         const url = new URL(request ? request.url : String(input), host.location.href);
         const method = (init?.method ?? request?.method ?? 'GET').toUpperCase();
+        if (enabled() && url.origin === host.location.origin && url.pathname === '/api/plugins/autopic/direct-models' && method === 'GET') {
+            return previous(destination.replace(/\/generate$/, '/direct-models'), init);
+        }
         if (!enabled() || url.origin !== host.location.origin || !GENERATION_PATHS.has(url.pathname) || method !== 'POST') return previous(input, init);
-        if (url.pathname.endsWith('/generate-direct')) return Response.json({message: 'AutoPic 생성 방식을 ST Image Generation · 기존 방식으로 선택하세요. SharedNAI 1.1은 이 모드를 지원합니다.'}, {status: 400});
+        const target = url.pathname.endsWith('/generate-direct') ? destination.replace(/\/generate$/, '/generate-direct') : destination;
         const body = init?.body ?? (request ? await request.clone().text() : undefined);
         const headers = new Headers(init?.headers ?? request?.headers);
         // Keep ST's CSRF header; credentials belong only to the server session.
         headers.delete('Authorization');
         headers.set('Content-Type', 'application/json');
         try {
-            const response = await previous(destination, {...init, method: 'POST', body, headers, credentials: 'same-origin', signal: init?.signal ?? request?.signal});
+            const response = await previous(target, {...init, method: 'POST', body, headers, credentials: 'same-origin', signal: init?.signal ?? request?.signal});
             try { onComplete(response.status); } catch { /* UI must not affect generation */ }
             return response;
         } catch {

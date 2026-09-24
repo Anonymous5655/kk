@@ -1,21 +1,22 @@
-<div class="inline-drawer">
+<div class="inline-drawer snb-panel">
  <div class="inline-drawer-toggle inline-drawer-header"><b>SharedNAI 연결</b><div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div></div>
- <div class="inline-drawer-content">
-  <label class="checkbox_label"><input id="snb-enabled" type="checkbox">NovelAI 이미지 요청을 sharednai5.pro로 연결</label>
-  <p>기본 Image Generation 및 AutoPic의 ‘ST Image Generation · 기존 방식’을 연결합니다. 다른 확장은 같은 NovelAI 이미지 요청 경로를 사용할 때 연결됩니다.</p>
-  <p>사이트 계정에 등록된 키를 사용합니다. 이미지 모델·크기·프롬프트는 사용하는 이미지 생성 확장에서 설정하세요.</p>
-  <label>사이트 아이디<input id="snb-username" class="text_pole" autocomplete="off"></label>
-  <label>사이트 비밀번호<input id="snb-password" class="text_pole" type="password" autocomplete="off"></label>
-  <div class="flex-container"><button id="snb-connect" class="menu_button">연결</button><button id="snb-check" class="menu_button">인증 확인</button><button id="snb-disconnect" class="menu_button">연결 해제</button></div>
-  <p>비밀번호는 저장하지 않습니다. 서버 재시작 또는 토큰 만료 후 다시 연결하세요.</p>
+ <div class="inline-drawer-content snb-content">
+  <label class="checkbox_label"><input id="snb-enabled" type="checkbox"><span>NovelAI 이미지 요청을 SharedNAI로 연결</span></label>
+  <p class="snb-note">기본 Image Generation과 AutoPic 기존 모드·V4.5 Full·V5 Full 직접 생성을 연결합니다. 모델과 이미지 설정은 사용 중인 이미지 생성 확장에서 선택하세요.</p>
+  <div class="snb-fields">
+   <label for="snb-username">사이트 아이디<input id="snb-username" class="text_pole" autocomplete="off"></label>
+   <label for="snb-password">사이트 비밀번호<input id="snb-password" class="text_pole" type="password" autocomplete="off"></label>
+  </div>
+  <div class="snb-actions">
+   <button type="button" id="snb-connect" class="menu_button">연결</button>
+   <button type="button" id="snb-check" class="menu_button">인증 확인</button>
+   <button type="button" id="snb-disconnect" class="menu_button">연결 해제</button>
+  </div>
   <p id="snb-status" role="status" aria-live="polite"></p>
-  <hr><b>계정 크레딧·할당량</b>
-  <button id="snb-refresh" class="menu_button">계정 정보 새로고침</button>
+  <p class="snb-note">사이트 계정에 등록된 키를 사용합니다. 비밀번호는 저장하지 않으며, 서버 재시작 또는 토큰 만료 후 다시 연결해야 합니다.</p>
+  <div class="snb-account-header"><b>크레딧·할당량</b><button type="button" id="snb-refresh" class="menu_button">계정 정보 새로고침</button></div>
   <dl id="snb-account"></dl>
   <p id="snb-account-status" role="status" aria-live="polite">연결 후 표시됩니다.</p>
-  <small>사이트가 제공한 값만 표시합니다. ‘정보 없음’은 0이나 무제한을 뜻하지 않습니다. 연결 시·이미지 요청 완료 후·새로고침 시 조회합니다.</small>
-  <hr>
-  <label class="checkbox_label"><input id="snb-size-labels" type="checkbox">기본 Image Generation 크기에 가로·세로·정사각형 표시</label>
-  <small>예: 1216x832 (가로), 832x1216 (세로), 1024x1024 (정사각형). 크기 값은 변경하지 않습니다.</small>
+  <p class="snb-note">사이트가 제공한 값만 표시합니다. ‘정보 없음’은 0이나 무제한을 뜻하지 않습니다. 연결 시·이미지 요청 완료 후·새로고침 시 조회합니다.</p>
  </div>
 </div>
